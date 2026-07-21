@@ -22,10 +22,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  min-height: 100vh;
   max-width: 1200px;
   width: 100%;
   gap: 60px;
   padding: 40px;
+  margin: 0 auto;
   position: relative;
 }
 
