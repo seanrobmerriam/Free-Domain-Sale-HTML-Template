@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyDomain.com - For Sale</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #1864f0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .settings-icon {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #ffffff;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-top-right-radius: 4px;
+            border-bottom-right-radius: 4px;
+            cursor: pointer;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            color: #333;
+            font-size: 14px;
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1200px;
+            width: 100%;
+            gap: 60px;
+            padding: 40px;
+        }
+
+        .left-content {
+            flex: 1;
+            color: white;
+        }
+
+        .for-sale-badge {
+            display: inline-block;
+            background-color: #e63946;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .domain-name {
+            font-size: 56px;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 25px;
+            line-height: 1.1;
+        }
+
+        .domain-name .tld {
+            font-weight: 800;
+        }
+
+        .value-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .estimated-text {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+        }
+
+        .value-badge {
+            background-color: #2dc653;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 18px;
+            font-weight: 700;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .description {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.6;
+            margin-bottom: 30px;
+            max-width: 500px;
+        }
+
+        .contact-info {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            font-size: 14px;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .contact-item:hover {
+            opacity: 0.8;
+        }
+
+        .contact-item i {
+            font-size: 16px;
+        }
+
+        .right-content {
+            flex: 0 0 420px;
+        }
+
+        .offer-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 35px 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .offer-card h2 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+
+        .offer-card .subtitle {
+            font-size: 13px;
+            color: #888;
+            text-align: center;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        .input-group i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #aaa;
+            font-size: 14px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 14px 15px 14px 42px;
+            border: 1px solid #e5e5e5;
+            border-radius: 6px;
+            font-size: 14px;
+            color: #333;
+            transition: border-color 0.2s;
+            outline: none;
+            background-color: #fff;
+        }
+
+        .input-group input::placeholder {
+            color: #aaa;
+        }
+
+        .input-group input:focus {
+            border-color: #1864f0;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            background-color: #1864f0;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.2s;
+        }
+
+        .submit-btn:hover {
+            background-color: #1252d3;
+        }
+
+        @media (max-width: 900px) {
+            .container {
+                flex-direction: column;
+                gap: 40px;
+                padding: 30px 20px;
+            }
+
+            .domain-name {
+                font-size: 42px;
+            }
+
+            .for-sale-badge {
+                font-size: 22px;
+            }
+
+            .right-content {
+                flex: 1;
+                width: 100%;
+                max-width: 420px;
+            }
+
+            .contact-info {
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .domain-name {
+                font-size: 32px;
+            }
+
+            .for-sale-badge {
+                font-size: 18px;
+                padding: 8px 16px;
+            }
+
+            .value-section {
+                flex-wrap: wrap;
+            }
+        }
+
+        /* WhatsApp Floating Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background-color: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+            cursor: pointer;
+            z-index: 1000;
+            text-decoration: none;
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: pulse 2s infinite;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.6);
+        }
+
+        .whatsapp-float i {
+            color: white;
+            font-size: 32px;
+        }
+
+        .whatsapp-tooltip {
+            position: absolute;
+            right: 75px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #333;
+            color: white;
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-size: 13px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        .whatsapp-tooltip::after {
+            content: '';
+            position: absolute;
+            right: -6px;
+            top: 50%;
+            transform: translateY(-50%);
+            border-width: 6px 0 6px 6px;
+            border-style: solid;
+            border-color: transparent transparent transparent #333;
+        }
+
+        .whatsapp-float:hover .whatsapp-tooltip {
+            opacity: 1;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4), 0 0 0 0 rgba(37, 211, 102, 0.6);
+            }
+            70% {
+                box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4), 0 0 0 15px rgba(37, 211, 102, 0);
+            }
+            100% {
+                box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4), 0 0 0 0 rgba(37, 211, 102, 0);
+            }
+        }
+
+        @media (max-width: 500px) {
+            .whatsapp-float {
+                width: 52px;
+                height: 52px;
+                bottom: 20px;
+                right: 20px;
+            }
+
+            .whatsapp-float i {
+                font-size: 28px;
+            }
+
+            .whatsapp-tooltip {
+                display: none;
+            }
+        }
+
+        /* Telegram Floating Button */
+        .telegram-float {
+            position: fixed;
+            bottom: 105px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background-color: #2AABEE;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 20px rgba(42, 171, 238, 0.4);
+            cursor: pointer;
+            z-index: 1000;
+            text-decoration: none;
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: pulse-telegram 2s infinite;
+        }
+
+        .telegram-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(42, 171, 238, 0.6);
+        }
+
+        .telegram-float i {
+            color: white;
+            font-size: 30px;
+        }
+
+        .telegram-tooltip {
+            position: absolute;
+            right: 75px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #333;
+            color: white;
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-size: 13px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        .telegram-tooltip::after {
+            content: '';
+            position: absolute;
+            right: -6px;
+            top: 50%;
+            transform: translateY(-50%);
+            border-width: 6px 0 6px 6px;
+            border-style: solid;
+            border-color: transparent transparent transparent #333;
+        }
+
+        .telegram-float:hover .telegram-tooltip {
+            opacity: 1;
+        }
+
+        @keyframes pulse-telegram {
+            0% {
+                box-shadow: 0 6px 20px rgba(42, 171, 238, 0.4), 0 0 0 0 rgba(42, 171, 238, 0.6);
+            }
+            70% {
+                box-shadow: 0 6px 20px rgba(42, 171, 238, 0.4), 0 0 0 15px rgba(42, 171, 238, 0);
+            }
+            100% {
+                box-shadow: 0 6px 20px rgba(42, 171, 238, 0.4), 0 0 0 0 rgba(42, 171, 238, 0);
+            }
+        }
+
+        @media (max-width: 500px) {
+            .telegram-float {
+                width: 52px;
+                height: 52px;
+                bottom: 85px;
+                right: 20px;
+            }
+
+            .telegram-float i {
+                font-size: 26px;
+            }
+
+            .telegram-tooltip {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="settings-icon" title="Settings">
+        <i class="fas fa-cog"></i>
+    </div>
+
+    <div class="container">
+        <div class="left-content">
+            <div class="for-sale-badge">For Sale!</div>
+            <h1 class="domain-name">MomsFantasy<span class="tld">.com</span></h1>
+
+            <div class="value-section">
+                <span class="estimated-text">Estimated value</span>
+                <span class="value-badge">$3650</span>
+            </div>
+
+            <p class="description">
+                Premium Domain for Sale. Send your offer today! 
+            </p>
+
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-phone-alt"></i>
+                    <span>+1-831-677-2776</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>info@mydomain.com</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-globe"></i>
+                    <span>More Domains</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="right-content">
+            <div class="offer-card">
+                <h2>Make Your offer</h2>
+                <p class="subtitle">Please fill out the form below so that the seller receive your offer.</p>
+
+                <form id="offerForm" onsubmit="handleSubmit(event)">
+                    <div class="input-group">
+                        <i class="fas fa-user"></i>
+                        <input type="text" placeholder="Enter Your Name" required>
+                    </div>
+
+                    <div class="input-group">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" placeholder="Enter Your Email" required>
+                    </div>
+
+                    <div class="input-group">
+                        <i class="fas fa-dollar-sign"></i>
+                        <input type="number" placeholder="Enter Your Offer" required>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Send My Offer</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Telegram Floating Button -->
+    <!-- Replace 'yourusername' with your Telegram username (without the @) -->
+    <a href="https://t.me/yourusername?text=Hi%2C%20I%27m%20interested%20in%20MyDomain.com.%20Is%20it%20still%20available%3F"
+       class="telegram-float"
+       target="_blank"
+       rel="noopener noreferrer"
+       aria-label="Chat on Telegram">
+        <i class="fab fa-telegram"></i>
+        <span class="telegram-tooltip">Chat with us on Telegram</span>
+    </a>
+
+    <!-- WhatsApp Floating Button -->
+    <!-- Replace 9111212142566 with your WhatsApp number (no + or spaces, just digits with country code) -->
+    <a href="https://wa.me/9111212142566?text=Hi%2C%20I%27m%20interested%20in%20MyDomain.com.%20Is%20it%20still%20available%3F"
+       class="whatsapp-float"
+       target="_blank"
+       rel="noopener noreferrer"
+       aria-label="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+        <span class="whatsapp-tooltip">Chat with us on WhatsApp</span>
+    </a>
+
+    <script>
+        function handleSubmit(event) {
+            event.preventDefault();
+            alert('Thank you! Your offer has been submitted.');
+        }
+    </script>
+</body>
+</html>
