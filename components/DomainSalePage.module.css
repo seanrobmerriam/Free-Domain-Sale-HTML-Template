@@ -1,0 +1,403 @@
+.settingsIcon {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #ffffff;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  cursor: pointer;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  color: #333;
+  font-size: 14px;
+  z-index: 10;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  width: 100%;
+  gap: 60px;
+  padding: 40px;
+  position: relative;
+}
+
+.leftContent {
+  flex: 1;
+  color: white;
+}
+
+.forSaleBadge {
+  display: inline-block;
+  background-color: #e63946;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.domainName {
+  font-size: 56px;
+  font-weight: 800;
+  color: white;
+  margin-bottom: 25px;
+  line-height: 1.1;
+}
+
+.tld {
+  font-weight: 800;
+}
+
+.valueSection {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.estimatedText {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+}
+
+.valueBadge {
+  background-color: #2dc653;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 18px;
+  font-weight: 700;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.description {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.6;
+  margin-bottom: 30px;
+  max-width: 500px;
+}
+
+.contactInfo {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.contactItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.contactItem:hover {
+  opacity: 0.8;
+}
+
+.contactItem i {
+  font-size: 16px;
+}
+
+.rightContent {
+  flex: 0 0 420px;
+}
+
+.offerCard {
+  background-color: white;
+  border-radius: 12px;
+  padding: 35px 30px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+.offerTitle {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.subtitle {
+  font-size: 13px;
+  color: #888;
+  text-align: center;
+  margin-bottom: 25px;
+  line-height: 1.5;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.inputGroup {
+  position: relative;
+  margin-bottom: 15px;
+}
+
+.inputGroup i {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #aaa;
+  font-size: 14px;
+}
+
+.inputGroup input {
+  width: 100%;
+  padding: 14px 15px 14px 42px;
+  border: 1px solid #e5e5e5;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #333;
+  transition: border-color 0.2s;
+  outline: none;
+  background-color: #fff;
+  font-family: inherit;
+}
+
+.inputGroup input::placeholder {
+  color: #aaa;
+}
+
+.inputGroup input:focus {
+  border-color: #1864f0;
+}
+
+.submitBtn {
+  width: 100%;
+  padding: 14px;
+  background-color: #1864f0;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.2s;
+  font-family: inherit;
+}
+
+.submitBtn:hover:not(:disabled) {
+  background-color: #1252d3;
+}
+
+.submitBtn:disabled {
+  cursor: not-allowed;
+  opacity: 0.85;
+}
+
+.submitSuccess {
+  background-color: #2dc653 !important;
+}
+
+.submitError {
+  background-color: #e63946 !important;
+}
+
+/* WhatsApp floating button */
+.whatsappFloat {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  background-color: #25D366;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+  cursor: pointer;
+  z-index: 1000;
+  transition: transform 0.3s, box-shadow 0.3s;
+  animation: pulseWa 2s infinite;
+}
+
+.whatsappFloat:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 25px rgba(37, 211, 102, 0.6);
+}
+
+.whatsappFloat i {
+  color: white;
+  font-size: 32px;
+}
+
+.whatsappTooltip {
+  position: absolute;
+  right: 75px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #333;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+
+.whatsappTooltip::after {
+  content: '';
+  position: absolute;
+  right: -6px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-width: 6px 0 6px 6px;
+  border-style: solid;
+  border-color: transparent transparent transparent #333;
+}
+
+.whatsappFloat:hover .whatsappTooltip {
+  opacity: 1;
+}
+
+/* Telegram floating button */
+.telegramFloat {
+  position: fixed;
+  bottom: 105px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  background-color: #2AABEE;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 20px rgba(42, 171, 238, 0.4);
+  cursor: pointer;
+  z-index: 1000;
+  transition: transform 0.3s, box-shadow 0.3s;
+  animation: pulseTg 2s infinite;
+}
+
+.telegramFloat:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 25px rgba(42, 171, 238, 0.6);
+}
+
+.telegramFloat i {
+  color: white;
+  font-size: 30px;
+}
+
+.telegramTooltip {
+  position: absolute;
+  right: 75px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #333;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+
+.telegramTooltip::after {
+  content: '';
+  position: absolute;
+  right: -6px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-width: 6px 0 6px 6px;
+  border-style: solid;
+  border-color: transparent transparent transparent #333;
+}
+
+.telegramFloat:hover .telegramTooltip {
+  opacity: 1;
+}
+
+@keyframes pulseWa {
+  0%   { box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4), 0 0 0 0 rgba(37, 211, 102, 0.6); }
+  70%  { box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4), 0 0 0 15px rgba(37, 211, 102, 0); }
+  100% { box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4), 0 0 0 0 rgba(37, 211, 102, 0); }
+}
+
+@keyframes pulseTg {
+  0%   { box-shadow: 0 6px 20px rgba(42, 171, 238, 0.4), 0 0 0 0 rgba(42, 171, 238, 0.6); }
+  70%  { box-shadow: 0 6px 20px rgba(42, 171, 238, 0.4), 0 0 0 15px rgba(42, 171, 238, 0); }
+  100% { box-shadow: 0 6px 20px rgba(42, 171, 238, 0.4), 0 0 0 0 rgba(42, 171, 238, 0); }
+}
+
+@media (max-width: 900px) {
+  .container {
+    flex-direction: column;
+    gap: 40px;
+    padding: 30px 20px;
+  }
+  .domainName {
+    font-size: 42px;
+  }
+  .forSaleBadge {
+    font-size: 22px;
+  }
+  .rightContent {
+    flex: 1;
+    width: 100%;
+    max-width: 420px;
+  }
+  .contactInfo {
+    gap: 20px;
+  }
+}
+
+@media (max-width: 500px) {
+  .domainName {
+    font-size: 32px;
+  }
+  .forSaleBadge {
+    font-size: 18px;
+    padding: 8px 16px;
+  }
+  .whatsappFloat {
+    width: 52px;
+    height: 52px;
+    bottom: 20px;
+    right: 20px;
+  }
+  .whatsappFloat i {
+    font-size: 28px;
+  }
+  .whatsappTooltip {
+    display: none;
+  }
+  .telegramFloat {
+    width: 52px;
+    height: 52px;
+    bottom: 85px;
+    right: 20px;
+  }
+  .telegramFloat i {
+    font-size: 26px;
+  }
+  .telegramTooltip {
+    display: none;
+  }
+}
