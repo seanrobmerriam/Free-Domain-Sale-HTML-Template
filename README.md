@@ -1,6 +1,8 @@
+![Screenshot](assets/screenshot.png)
+
 # Domain Sale Landing Pages
 
-A Next.js 14 app that hosts for-sale landing pages for multiple domains. Form submissions are stored in Neon serverless Postgres.
+A free Next.js 14 app that hosts domain for-sale landing pages for multiple domains. Form submissions are stored in Neon serverless Postgres.
 
 ## Routes
 
