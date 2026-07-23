@@ -18,7 +18,7 @@ Visitors see a polished landing page, switch between **4 themes** and **5 layout
 | **Bot protection** | Cloudflare Turnstile (invisible) — gracefully bypassed if keys aren't set. |
 | **Floating chat** | WhatsApp + Telegram buttons with pre-filled messages and pulse animations. |
 | **SSR-safe** | Server-rendered first paint matches what crawlers see — no FOUC, no hydration warnings. |
-| **CI + pre-commit** | Husky pre-commit + GitHub Actions run a 21-check smoke test on every push/PR. |
+| **CI + pre-commit** | Husky pre-commit + GitHub Actions run a 24-check smoke test on every push/PR. |
 
 ---
 
@@ -215,7 +215,7 @@ Both floating buttons pre-fill: `"Hi, I'm interested in {domain}. Is it still av
 
 ## 🤖 CI + pre-commit hooks
 
-Every commit is gated by a **21-check smoke test** that catches static issues (missing imports, broken theme/layout wiring, dead API routes) before they land.
+Every commit is gated by a **24-check smoke test** that catches static issues (missing imports, broken theme/layout wiring, dead API routes) before they land.
 
 - **Local**: `.husky/pre-commit` runs `npm run smoke-test` before each commit.
 - **Remote**: `.github/workflows/ci.yml` runs smoke test + lint + build on every push/PR to `main`.
