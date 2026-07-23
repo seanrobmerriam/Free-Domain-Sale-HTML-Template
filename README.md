@@ -1,12 +1,14 @@
+![Postbox logo](logos/logo.png)
+
 # Domain Sale Landing Pages
 
-A Next.js 14 app that hosts **for-sale landing pages for multiple premium domains**. Each domain gets its own static page at `/<slug>`, with an offer form that persists to **Neon Postgres** and emails you via **Resend**.
+A Next.js 14 app that hosts **for-sale landing pages for multiple domain names**. Each domain gets its own static page at `/<slug>`, with an offer form that persists to **Neon Postgres** and emails you via **Resend** (Optional).
 
 Visitors see a polished landing page, switch between **4 themes** and **5 layouts** with a single gear icon, and submit offers through a bot-protected form. Per-domain entries live in a single config file — adding a new domain is a 6-line edit.
 
 ---
 
-## ✨ What you get out of the box
+## What you get out of the box
 
 | Capability | Details |
 |---|---|
@@ -22,7 +24,7 @@ Visitors see a polished landing page, switch between **4 themes** and **5 layout
 
 ---
 
-## 🚀 Routes
+## Routes
 
 | URL | Shows |
 |---|---|
@@ -35,7 +37,7 @@ Unknown slugs hit a custom 404 page.
 
 ---
 
-## 📁 Project structure
+## Project structure
 
 ```
 domain_sale/
@@ -54,9 +56,9 @@ domain_sale/
 │   ├── ThemeSwitcher.js         # gear button + theme/layout picker panel
 │   └── ThemeSwitcher.module.css
 ├── lib/
-│   ├── domains.js               # ⭐ edit to add/change domains
-│   ├── layouts.js               # ⭐ edit to add/change layouts
-│   └── themes.js                # ⭐ edit to add/change themes
+│   ├── domains.js               # edit to add/change domains
+│   ├── layouts.js               # edit to add/change layouts
+│   └── themes.js                # edit to add/change themes
 ├── scripts/
 │   └── smoke-test.js            # static checks used by Husky + CI
 ├── .env.local.example
@@ -71,7 +73,7 @@ domain_sale/
 
 ---
 
-## ➕ Adding a domain
+## Adding a domain
 
 Edit `lib/domains.js` and append an object to the `domains` array:
 
@@ -88,9 +90,9 @@ Edit `lib/domains.js` and append an object to the `domains` array:
 }
 ```
 
-Then `npm run build` (or let Vercel deploy on push). The new route is live.
+Then `npm run build` (or let Vercel deploy on push). The new route is now live.
 
-## 🎨 Adding a theme
+## Adding a theme
 
 Edit `lib/themes.js` and append an object. Each theme is a flat map of CSS custom properties. Available variables:
 
@@ -109,7 +111,7 @@ Edit `lib/themes.js` and append an object. Each theme is a flat map of CSS custo
 
 To change the default theme, edit `defaultThemeId` in `lib/themes.js`.
 
-## 🧱 Adding a layout
+## Adding a layout
 
 Layouts are CSS variants driven by `data-layout={layout.id}` on the container. To add one:
 
@@ -145,13 +147,13 @@ Visit [http://localhost:3000](http://localhost:3000).
 
 ---
 
-## 🔐 Environment variables
+## Environment variables
 
 All optional except `DATABASE_URL`. The app degrades gracefully when optional vars are missing.
 
 | Var | Required? | Purpose |
 |---|---|---|
-| `DATABASE_URL` | ✅ Yes | Neon Postgres connection string |
+| `DATABASE_URL` | Yes | Neon Postgres connection string |
 | `NEXT_PUBLIC_TURNSTILE_SITE_KEY` | Optional | Turnstile site key (client). Skip → no CAPTCHA |
 | `TURNSTILE_SECRET_KEY` | Optional | Turnstile secret (server). Skip → verification bypassed |
 | `RESEND_API_KEY` | Optional | Resend API key for offer-notification emails |
@@ -160,7 +162,7 @@ All optional except `DATABASE_URL`. The app degrades gracefully when optional va
 
 ---
 
-## 🗄 Neon setup
+## Neon setup
 
 Run once in the [Neon SQL editor](https://console.neon.tech):
 
@@ -175,11 +177,11 @@ CREATE TABLE offers (
 );
 ```
 
-Copy your connection string from the Neon dashboard → paste into `.env.local` as `DATABASE_URL`.
+Copy your connection string from the Neon dashboard and paste into `.env.local` as `DATABASE_URL`.
 
 ---
 
-## 🛡 Bot protection (Cloudflare Turnstile)
+## Bot protection (Cloudflare Turnstile - Optional)
 
 1. [Cloudflare dashboard → Turnstile](https://dash.cloudflare.com) → add a widget for your domain
 2. Copy the **Site Key** → `NEXT_PUBLIC_TURNSTILE_SITE_KEY`
@@ -189,7 +191,7 @@ The widget renders in the form when the site key is set. Without it, the form st
 
 ---
 
-## 📬 Email notifications (Resend)
+## Email notifications (Resend - Optional)
 
 You get an HTML email at `NOTIFICATION_EMAIL` whenever someone submits an offer.
 
@@ -202,7 +204,7 @@ Without these, offers still save — emails are skipped. The DB insert is the so
 
 ---
 
-## 💬 WhatsApp / Telegram numbers
+## WhatsApp / Telegram numbers & links (Optional)
 
 Per-domain in `lib/domains.js`:
 
@@ -213,7 +215,7 @@ Both floating buttons pre-fill: `"Hi, I'm interested in {domain}. Is it still av
 
 ---
 
-## 🤖 CI + pre-commit hooks
+## CI + pre-commit hooks
 
 Every commit is gated by a **24-check smoke test** that catches static issues (missing imports, broken theme/layout wiring, dead API routes) before they land.
 
@@ -224,7 +226,9 @@ To bypass the hook for a one-off commit (e.g. WIP): `git commit --no-verify`.
 
 ---
 
-## 🚢 Deployment
+## Deployment Options
+
+### Vercel (Free)
 
 1. Push to GitHub
 2. Import into [Vercel](https://vercel.com) — zero config
@@ -237,7 +241,7 @@ For a single domain, just point your DNS A/CNAME to Vercel and you're done.
 
 ---
 
-## 🧰 Useful scripts
+## Useful scripts
 
 ```bash
 npm run dev        # dev server with hot reload
@@ -250,7 +254,7 @@ npm test           # smoke-test + lint
 
 ---
 
-## 🩹 Troubleshooting
+## Troubleshooting
 
 - **`/api/offer` returns 500** → `DATABASE_URL` is missing or wrong. Check `.env.local` (and Vercel env vars if deployed). Format: `postgresql://user:pass@ep-xxx.region.aws.neon.tech/neondb?sslmode=require`
 - **Turnstile widget doesn't show** → the site key must be prefixed with `NEXT_PUBLIC_`. Restart `npm run dev` after changing env vars.
@@ -263,6 +267,6 @@ npm test           # smoke-test + lint
 
 ---
 
-## 📄 License
+## License
 
-Private — your call.
+MIT
