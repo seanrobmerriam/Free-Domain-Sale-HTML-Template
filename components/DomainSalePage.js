@@ -2,6 +2,8 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
+import { Turnstile } from '@marsidev/react-turnstile';
+import ThemeSwitcher from './ThemeSwitcher';
 import styles from './DomainSalePage.module.css';
 
 const STATUS = {
@@ -18,16 +20,23 @@ const BUTTON_LABEL = {
   [STATUS.ERROR]: 'Try Again',
 };
 
+// Public env var (NEXT_PUBLIC_ prefix → exposed to the browser)
+const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
+
 export default function DomainSalePage({ domain }) {
   const [status, setStatus] = useState(STATUS.IDLE);
+  const [turnstileToken, setTurnstileToken] = useState('');
 
   const message = `Hi, I'm interested in ${domain.name}. Is it still available?`;
   const waLink = `https://wa.me/${domain.whatsapp}?text=${encodeURIComponent(message)}`;
   const tgLink = `https://t.me/${domain.telegram}?text=${encodeURIComponent(message)}`;
 
+  const requiresTurnstile = Boolean(TURNSTILE_SITE_KEY);
+  const canSubmit = !requiresTurnstile || Boolean(turnstileToken);
+
   async function handleSubmit(event) {
     event.preventDefault();
-    if (status === STATUS.SENDING) return;
+    if (status === STATUS.SENDING || !canSubmit) return;
 
     const form = event.target;
     const data = {
@@ -35,6 +44,7 @@ export default function DomainSalePage({ domain }) {
       email: form.email.value.trim(),
       offer: Number(form.offer.value),
       domain: domain.name,
+      turnstileToken: turnstileToken || undefined,
     };
 
     setStatus(STATUS.SENDING);
@@ -45,8 +55,12 @@ export default function DomainSalePage({ domain }) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       });
-      if (!res.ok) throw new Error('Request failed');
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err.error || 'Request failed');
+      }
       form.reset();
+      setTurnstileToken('');
       setStatus(STATUS.SUCCESS);
     } catch (err) {
       console.error(err);
@@ -63,9 +77,7 @@ export default function DomainSalePage({ domain }) {
 
   return (
     <>
-      <div className={styles.settingsIcon} title="Settings">
-        <i className="fas fa-cog" />
-      </div>
+      <ThemeSwitcher />
 
       <div className={styles.container}>
         <div className={styles.leftContent}>
@@ -127,9 +139,21 @@ export default function DomainSalePage({ domain }) {
                 />
               </div>
 
+              {TURNSTILE_SITE_KEY && (
+                <div className={styles.turnstile}>
+                  <Turnstile
+                    siteKey={TURNSTILE_SITE_KEY}
+                    onSuccess={(token) => setTurnstileToken(token)}
+                    onError={() => setTurnstileToken('')}
+                    onExpire={() => setTurnstileToken('')}
+                    options={{ theme: 'light' }}
+                  />
+                </div>
+              )}
+
               <button
                 type="submit"
-                disabled={status === STATUS.SENDING}
+                disabled={status === STATUS.SENDING || !canSubmit}
                 className={`${styles.submitBtn} ${
                   status === STATUS.SUCCESS ? styles.submitSuccess : ''
                 } ${status === STATUS.ERROR ? styles.submitError : ''}`}
