@@ -132,6 +132,98 @@
 }
 
 /* ===========================================================================
+ * LAYOUT: EDITORIAL (magazine-style: full-width title banner up top,
+ *                       description + contact on the left, card on the right)
+ *
+ * Uses display: contents on .leftContent so its children participate
+ * directly in the parent grid. This lets the title elements span the
+ * full width while the rest of the content sits in 2 columns below.
+ * ========================================================================= */
+.container[data-layout='editorial'] {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 380px;
+  grid-template-rows: auto auto auto 1fr auto;
+  gap: 12px 50px;
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 50px 40px 60px;
+  min-height: 100vh;
+  color: var(--fg, #ffffff);
+}
+
+.container[data-layout='editorial'] .leftContent {
+  display: contents;
+}
+
+.container[data-layout='editorial'] .forSaleBadge {
+  grid-column: 1 / -1;
+  grid-row: 1;
+  justify-self: center;
+  margin-bottom: 0;
+}
+
+.container[data-layout='editorial'] .domainName {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  text-align: center;
+  margin: 4px auto 0;
+  font-size: 68px;
+  line-height: 1.05;
+}
+
+.container[data-layout='editorial'] .valueSection {
+  grid-column: 1 / -1;
+  grid-row: 3;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.container[data-layout='editorial'] .description {
+  grid-column: 1;
+  grid-row: 4;
+  margin-bottom: 16px;
+  text-align: left;
+  align-self: center;
+  max-width: 500px;
+}
+
+.container[data-layout='editorial'] .contactInfo {
+  grid-column: 1;
+  grid-row: 5;
+}
+
+.container[data-layout='editorial'] .rightContent {
+  grid-column: 2;
+  grid-row: 4 / 6;
+  align-self: center;
+}
+
+/* Editorial on small screens: stack everything */
+@media (max-width: 900px) {
+  .container[data-layout='editorial'] {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto auto auto auto;
+    gap: 18px;
+    text-align: center;
+    padding: 30px 20px;
+  }
+
+  .container[data-layout='editorial'] .forSaleBadge,
+  .container[data-layout='editorial'] .domainName,
+  .container[data-layout='editorial'] .valueSection {
+    grid-column: 1;
+  }
+
+  .container[data-layout='editorial'] .forSaleBadge { grid-row: 1; }
+  .container[data-layout='editorial'] .domainName   { grid-row: 2; font-size: 42px; }
+  .container[data-layout='editorial'] .valueSection { grid-row: 3; }
+  .container[data-layout='editorial'] .description  { grid-row: 4; text-align: center; max-width: none; }
+  .container[data-layout='editorial'] .contactInfo  { grid-row: 5; justify-content: center; }
+  .container[data-layout='editorial'] .rightContent { grid-row: 6; grid-column: 1; align-self: start; max-width: 420px; width: 100%; margin: 0 auto; }
+}
+
+/* ===========================================================================
  * SHARED CONTENT (layout-agnostic)
  * ========================================================================= */
 .leftContent {

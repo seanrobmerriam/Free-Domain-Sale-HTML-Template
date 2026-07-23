@@ -143,6 +143,12 @@ if (fileExists('lib/layouts.js')) {
     } else {
         fail('does NOT export defaultLayoutId');
     }
+    // Verify the editorial layout specifically is declared
+    if (/id:\s*['"]editorial['"]/.test(content)) {
+        pass('declares editorial layout');
+    } else {
+        fail('does NOT declare editorial layout');
+    }
 } else {
     fail('Missing file: lib/layouts.js');
 }
@@ -173,6 +179,11 @@ if (fileExists('components/DomainSalePage.module.css')) {
     } else {
         fail(`only ${layoutSelectors} [data-layout=...] selectors (expected >= 4)`);
     }
+    if (/\[data-layout=['"]editorial['"]\]/.test(content)) {
+        pass('defines [data-layout="editorial"] CSS rule');
+    } else {
+        fail('missing [data-layout="editorial"] CSS rule — Editorial layout won\'t apply');
+    }
 }
 
 // ---------------------------------------------------------------------------
@@ -190,6 +201,39 @@ if (fileExists('app/api/offer/route.js')) {
         pass('references Neon / DATABASE_URL');
     } else {
         fail('does NOT reference Neon / DATABASE_URL');
+    }
+}
+
+// ---------------------------------------------------------------------------
+section('7. Layout preview is rendered in ThemeSwitcher');
+// ---------------------------------------------------------------------------
+
+if (fileExists('components/ThemeSwitcher.js')) {
+    const content = readFile('components/ThemeSwitcher.js');
+    if (/LayoutPreview/.test(content)) {
+        pass('defines LayoutPreview component');
+    } else {
+        fail('does NOT define LayoutPreview');
+    }
+    if (/LayoutPreview[\s\S]+layoutId/.test(content)) {
+        pass('LayoutPreview is rendered with layoutId');
+    } else {
+        fail('LayoutPreview is NOT called with layoutId');
+    }
+    if (/preview_\$\{layoutId\}/.test(content)) {
+        pass('CSS class computed per layout via template literal');
+    } else {
+        fail('missing dynamic preview_${layoutId} class binding');
+    }
+}
+
+if (fileExists('components/ThemeSwitcher.module.css')) {
+    const content = readFile('components/ThemeSwitcher.module.css');
+    const previewRules = (content.match(/\.preview_[a-z]+/g) || []).length;
+    if (previewRules >= 5) {
+        pass(`defines ${previewRules} .preview_<id> CSS rules`);
+    } else {
+        fail(`only ${previewRules} .preview_<id> CSS rules (expected >= 5 — one per layout)`);
     }
 }
 

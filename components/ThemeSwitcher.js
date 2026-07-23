@@ -4,6 +4,28 @@ import { useEffect, useState } from 'react';
 import { useTheme } from './ThemeProvider';
 import styles from './ThemeSwitcher.module.css';
 
+/**
+ * A tiny visual preview of a layout, rendered inside the panel row.
+ * Uses pure CSS to depict the layout at ~52×38 px.
+ *
+ * Rendered shapes (2 or 3 spans per layout) — see the matching
+ * `.preview_<id>` class in ThemeSwitcher.module.css.
+ */
+function LayoutPreview({ layoutId, isActive }) {
+  const cls = `${styles.preview} ${styles[`preview_${layoutId}`]} ${
+    isActive ? styles.previewActive : ''
+  }`;
+  // Editorial needs a third span representing the title banner that
+  // spans the full width at the top of the layout.
+  return (
+    <div className={cls} aria-hidden="true">
+      <span />
+      {layoutId === 'editorial' && <span />}
+      <span />
+    </div>
+  );
+}
+
 export default function ThemeSwitcher() {
   const { theme, setThemeId, themes, layout, setLayoutId, layouts } = useTheme();
   const [open, setOpen] = useState(false);
@@ -112,10 +134,7 @@ export default function ThemeSwitcher() {
                       }`}
                       aria-pressed={isActive}
                     >
-                      <i
-                        className={`fas ${l.icon} ${styles.layoutIcon}`}
-                        aria-hidden="true"
-                      />
+                      <LayoutPreview layoutId={l.id} isActive={isActive} />
                       <span className={styles.layoutBody}>
                         <span className={styles.layoutName}>{l.name}</span>
                         <span className={styles.layoutDesc}>
