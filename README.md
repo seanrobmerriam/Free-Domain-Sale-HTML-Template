@@ -4,6 +4,9 @@
 
 A free Next.js 14 app that hosts domain for-sale landing pages for multiple domains. Form submissions are stored in Neon serverless Postgres.
 
+A while ago I needed a quick way to put up a domain name sale landing page, and I was far too lazy to take the 10 minutes to write it by hand. I also wanted to be able to route to multiple pages listing multiple domains from one app, so I created this. It is offered 100% free of charge, MIT licensed. There are no hidden affiliate tracking links or any other spam included. 
+
+
 ## Routes
 
 | URL | Shows |
@@ -44,7 +47,15 @@ Visit `http://localhost:3000`.
 
 ## Neon setup
 
-Run this once in the Neon SQL editor:
+### Sign up
+
+Go to https://neon.com/ and sign up for a free account.
+
+### Create Project & Table
+
+1. Create a new project and name it whatever you want.
+2. On the left sidebar, click "SQL Editor"
+3. When the SQL editor opens, paste this and click "Run":
 
 ```sql
 CREATE TABLE offers (
@@ -57,7 +68,11 @@ CREATE TABLE offers (
 );
 ```
 
-Then drop your connection string into `.env.local` as `DATABASE_URL`.
+8. Go back to the sidebar and click "Overview", go down to "Computes", and click "Connect"
+9. Copy the link starting with "postgresql://", and paste the entire thing into `.env.local` as `DATABASE_URL`.
+
+ NOTE: Do **NOT** track your env.local with git. If you are deploying somewhere that deploys from a git repo, you are going to have to add an the environment variable manually.
+ Find the area on netlify, vercel, coolify, dokploy, etc. labeled "Environments", "Env", or something similar, and add DATABASE_URL=postgresql://... (use your full connection string)
 
 ## Troubleshooting
 
@@ -72,4 +87,4 @@ Then drop your connection string into `.env.local` as `DATABASE_URL`.
 
 ## Deployment
 
-Push to GitHub and import into [Vercel](https://vercel.com) — zero config. Add `DATABASE_URL` in **Settings → Environment Variables** before the first deploy.
+Push to GitHub and import into [Vercel](https://vercel.com) for easy, free hosting — zero config. Add `DATABASE_URL` in **Settings → Environment Variables** before the first deploy.
