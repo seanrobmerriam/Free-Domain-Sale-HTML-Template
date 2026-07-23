@@ -238,6 +238,74 @@ if (fileExists('components/ThemeSwitcher.module.css')) {
 }
 
 // ---------------------------------------------------------------------------
+section('8. Admin & analytics files exist');
+// ---------------------------------------------------------------------------
+
+const mustExist = [
+    'lib/admin-auth.js',
+    'app/admin/page.js',
+    'app/admin/actions.js',
+    'app/admin/login-form.js',
+    'app/admin/offers-table.js',
+    'app/admin/admin.module.css',
+    'app/og/[domain]/route.js',
+    'tests/themes.test.js',
+    'tests/layouts.test.js',
+    'tests/domains.test.js',
+    'tests/api-offer.test.js',
+    'vitest.config.js',
+];
+for (const f of mustExist) {
+    if (fileExists(f)) pass(f);
+    else fail(`Missing file: ${f}`);
+}
+
+// package.json should declare test:unit script
+if (fileExists('package.json')) {
+    const pkg = readFile('package.json');
+    if (/"test:unit"/.test(pkg)) {
+        pass('package.json declares test:unit script');
+    } else {
+        fail('package.json missing test:unit script — vitest won\'t run');
+    }
+}
+
+// app/layout.js should import Analytics
+if (fileExists('app/layout.js')) {
+    const content = readFile('app/layout.js');
+    if (/@vercel\/analytics/.test(content)) {
+        pass('layout.js imports @vercel/analytics');
+    } else {
+        fail('layout.js does NOT import @vercel/analytics');
+    }
+    if (/<Analytics\s*\/?>/.test(content)) {
+        pass('layout.js renders <Analytics />');
+    } else {
+        fail('layout.js does NOT render <Analytics />');
+    }
+}
+
+// DomainSalePage should track offer submissions
+if (fileExists('components/DomainSalePage.js')) {
+    const content = readFile('components/DomainSalePage.js');
+    if (/track\(['"]offer_submitted/.test(content)) {
+        pass('DomainSalePage tracks offer_submitted event');
+    } else {
+        fail('DomainSalePage does NOT track offer_submitted event');
+    }
+}
+
+// .env.local.example should reference ADMIN_PASSWORD
+if (fileExists('.env.local.example')) {
+    const content = readFile('.env.local.example');
+    if (/ADMIN_PASSWORD/.test(content)) {
+        pass('.env.local.example documents ADMIN_PASSWORD');
+    } else {
+        fail('.env.local.example does NOT document ADMIN_PASSWORD');
+    }
+}
+
+// ---------------------------------------------------------------------------
 // Summary
 // ---------------------------------------------------------------------------
 

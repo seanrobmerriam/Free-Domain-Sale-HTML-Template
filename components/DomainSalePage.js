@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { Turnstile } from '@marsidev/react-turnstile';
 import ThemeSwitcher from './ThemeSwitcher';
 import { useTheme } from './ThemeProvider';
+import { track } from '@vercel/analytics';
 import styles from './DomainSalePage.module.css';
 
 const STATUS = {
@@ -64,6 +65,7 @@ export default function DomainSalePage({ domain }) {
       form.reset();
       setTurnstileToken('');
       setStatus(STATUS.SUCCESS);
+      try { track('offer_submitted', { domain: domain.name, amount: data.offer }); } catch { /* analytics ad-blocker, etc. */ }
     } catch (err) {
       console.error(err);
       setStatus(STATUS.ERROR);

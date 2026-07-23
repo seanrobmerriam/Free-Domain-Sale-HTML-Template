@@ -8,15 +8,20 @@
     "start": "next start",
     "lint": "next lint",
     "smoke-test": "node scripts/smoke-test.js",
-    "test": "npm run smoke-test && npm run lint",
-    "prepare": "husky"
+    "test": "npm run smoke-test && npm run lint && npm run test:unit",
+    "prepare": "husky",
+    "test:unit": "vitest run",
+    "test:unit:watch": "vitest"
   },
   "dependencies": {
     "@marsidev/react-turnstile": "^1.5.3",
     "@neondatabase/serverless": "^0.9.3",
+    "@vercel/analytics": "^2.0.1",
+    "@vitejs/plugin-react": "^6.0.4",
     "next": "14.2.15",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "vitest": "^4.1.10"
   },
   "devDependencies": {
     "eslint": "^8.57.1",

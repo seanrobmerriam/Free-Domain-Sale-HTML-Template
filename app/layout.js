@@ -1,5 +1,6 @@
 import './globals.css';
 import { ThemeProvider } from '@/components/ThemeProvider';
+import { Analytics } from '@vercel/analytics/react';
 
 export const metadata = {
   title: 'Premium Domains For Sale',
@@ -21,6 +22,7 @@ export default function RootLayout({ children }) {
       </head>
       <body>
         <ThemeProvider>{children}</ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );
