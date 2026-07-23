@@ -74,6 +74,10 @@ CREATE TABLE offers (
  NOTE: Do **NOT** track your env.local with git. If you are deploying somewhere that deploys from a git repo, you are going to have to add an the environment variable manually.
  Find the area on netlify, vercel, coolify, dokploy, etc. labeled "Environments", "Env", or something similar, and add DATABASE_URL=postgresql://... (use your full connection string)
 
+ # Additional Functionality
+
+ I have included support for 
+
 ## Troubleshooting
 
 - **`/api/offer` returns 500** → `DATABASE_URL` is missing or wrong. Check `.env.local` (and Vercel env vars if deployed). Format: `postgresql://user:pass@ep-xxx.region.aws.neon.tech/neondb?sslmode=require`
