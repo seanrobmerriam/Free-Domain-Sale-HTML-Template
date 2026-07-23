@@ -79,6 +79,11 @@ if (fileExists('components/DomainSalePage.js')) {
     } else {
         fail('does NOT render <ThemeSwitcher />');
     }
+    if (/data-layout=\{layout\.id\}/.test(content)) {
+        pass('applies data-layout={layout.id} to the container');
+    } else {
+        fail('container is missing data-layout={layout.id} — layout switcher won\'t work');
+    }
     if (/settingsIcon/.test(content)) {
         fail('still has the old static `.settingsIcon` div — replace it with <ThemeSwitcher />');
     }
@@ -122,6 +127,27 @@ if (fileExists('lib/themes.js')) {
 }
 
 // ---------------------------------------------------------------------------
+section('4b. layouts.js has at least 4 layouts');
+// ---------------------------------------------------------------------------
+
+if (fileExists('lib/layouts.js')) {
+    const content = readFile('lib/layouts.js');
+    const layoutMatches = content.match(/^\s*id:\s*['"][^'"]+['"],/gm) || [];
+    if (layoutMatches.length >= 4) {
+        pass(`declares ${layoutMatches.length} layouts`);
+    } else {
+        fail(`declares only ${layoutMatches.length} layouts (expected >= 4)`);
+    }
+    if (/defaultLayoutId/.test(content)) {
+        pass('exports defaultLayoutId');
+    } else {
+        fail('does NOT export defaultLayoutId');
+    }
+} else {
+    fail('Missing file: lib/layouts.js');
+}
+
+// ---------------------------------------------------------------------------
 section('5. Theme tokens are wired into CSS');
 // ---------------------------------------------------------------------------
 
@@ -140,6 +166,12 @@ if (fileExists('components/DomainSalePage.module.css')) {
         pass('DomainSalePage.module.css uses --accent / --card-bg vars');
     } else {
         fail('DomainSalePage.module.css missing --accent / --card-bg vars — themes won\'t apply');
+    }
+    const layoutSelectors = (content.match(/\[data-layout=['"][^'"]+['"]\]/g) || []).length;
+    if (layoutSelectors >= 4) {
+        pass(`defines ${layoutSelectors} [data-layout=...] selectors`);
+    } else {
+        fail(`only ${layoutSelectors} [data-layout=...] selectors (expected >= 4)`);
     }
 }
 

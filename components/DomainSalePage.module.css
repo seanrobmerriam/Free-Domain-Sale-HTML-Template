@@ -1,4 +1,7 @@
-.container {
+/* ===========================================================================
+ * LAYOUT: SPLIT (default — side-by-side)
+ * ========================================================================= */
+.container[data-layout='split'] {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -12,6 +15,125 @@
   color: var(--fg, #ffffff);
 }
 
+/* ===========================================================================
+ * LAYOUT: STACK (vertical, text on top, card below)
+ * ========================================================================= */
+.container[data-layout='stack'] {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  padding: 60px 40px;
+  margin: 0 auto;
+  max-width: 720px;
+  min-height: 100vh;
+  text-align: center;
+  color: var(--fg, #ffffff);
+}
+
+.container[data-layout='stack'] .leftContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.container[data-layout='stack'] .contactInfo {
+  justify-content: center;
+}
+
+.container[data-layout='stack'] .rightContent {
+  flex: 0 0 auto;
+  width: 100%;
+  max-width: 420px;
+}
+
+/* ===========================================================================
+ * LAYOUT: CENTER (centered hero, single column)
+ * ========================================================================= */
+.container[data-layout='center'] {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 50px;
+  padding: 80px 40px;
+  margin: 0 auto;
+  min-height: 100vh;
+  max-width: 720px;
+  color: var(--fg, #ffffff);
+}
+
+.container[data-layout='center'] .leftContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.container[data-layout='center'] .contactInfo {
+  justify-content: center;
+}
+
+.container[data-layout='center'] .rightContent {
+  flex: 0 0 auto;
+  width: 100%;
+  max-width: 440px;
+}
+
+/* Bigger title in center layout */
+.container[data-layout='center'] .domainName {
+  font-size: 64px;
+}
+
+/* ===========================================================================
+ * LAYOUT: COMPACT (tight spacing, card-led)
+ * ========================================================================= */
+.container[data-layout='compact'] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  padding: 30px;
+  margin: 0 auto;
+  min-height: 100vh;
+  max-width: 1100px;
+  color: var(--fg, #ffffff);
+}
+
+.container[data-layout='compact'] .forSaleBadge {
+  font-size: 18px;
+  padding: 6px 14px;
+  margin-bottom: 12px;
+}
+
+.container[data-layout='compact'] .domainName {
+  font-size: 38px;
+  margin-bottom: 14px;
+}
+
+.container[data-layout='compact'] .valueSection {
+  margin-bottom: 14px;
+}
+
+.container[data-layout='compact'] .description {
+  font-size: 13px;
+  margin-bottom: 18px;
+}
+
+.container[data-layout='compact'] .rightContent {
+  flex: 0 0 360px;
+}
+
+.container[data-layout='compact'] .offerCard {
+  padding: 24px 22px;
+}
+
+/* ===========================================================================
+ * SHARED CONTENT (layout-agnostic)
+ * ========================================================================= */
 .leftContent {
   flex: 1;
   color: var(--fg, #ffffff);
@@ -340,23 +462,37 @@
   100% { box-shadow: 0 6px 20px rgba(42, 171, 238, 0.4), 0 0 0 0 rgba(42, 171, 238, 0); }
 }
 
+/* ===========================================================================
+ * MOBILE: always stack regardless of layout, but keep unique feel
+ * ========================================================================= */
 @media (max-width: 900px) {
-  .container {
+  .container[data-layout='split'],
+  .container[data-layout='stack'],
+  .container[data-layout='center'],
+  .container[data-layout='compact'] {
     flex-direction: column;
     gap: 40px;
     padding: 30px 20px;
   }
+
+  .container[data-layout='center'] .domainName {
+    font-size: 48px;
+  }
+
   .domainName {
     font-size: 42px;
   }
+
   .forSaleBadge {
     font-size: 22px;
   }
+
   .rightContent {
     flex: 1;
     width: 100%;
     max-width: 420px;
   }
+
   .contactInfo {
     gap: 20px;
   }
@@ -366,31 +502,38 @@
   .domainName {
     font-size: 32px;
   }
+
   .forSaleBadge {
     font-size: 18px;
     padding: 8px 16px;
   }
+
   .whatsappFloat {
     width: 52px;
     height: 52px;
     bottom: 20px;
     right: 20px;
   }
+
   .whatsappFloat i {
     font-size: 28px;
   }
+
   .whatsappTooltip {
     display: none;
   }
+
   .telegramFloat {
     width: 52px;
     height: 52px;
     bottom: 85px;
     right: 20px;
   }
+
   .telegramFloat i {
     font-size: 26px;
   }
+
   .telegramTooltip {
     display: none;
   }

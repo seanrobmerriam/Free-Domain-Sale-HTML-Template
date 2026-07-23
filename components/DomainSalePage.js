@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { Turnstile } from '@marsidev/react-turnstile';
 import ThemeSwitcher from './ThemeSwitcher';
+import { useTheme } from './ThemeProvider';
 import styles from './DomainSalePage.module.css';
 
 const STATUS = {
@@ -25,6 +26,7 @@ const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 
 export default function DomainSalePage({ domain }) {
   const [status, setStatus] = useState(STATUS.IDLE);
+  const { layout } = useTheme();
   const [turnstileToken, setTurnstileToken] = useState('');
 
   const message = `Hi, I'm interested in ${domain.name}. Is it still available?`;
@@ -79,7 +81,7 @@ export default function DomainSalePage({ domain }) {
     <>
       <ThemeSwitcher />
 
-      <div className={styles.container}>
+      <div className={styles.container} data-layout={layout.id}>
         <div className={styles.leftContent}>
           <div className={styles.forSaleBadge}>For Sale!</div>
           <h1 className={styles.domainName}>
