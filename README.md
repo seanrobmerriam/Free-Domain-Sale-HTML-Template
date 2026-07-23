@@ -1,4 +1,4 @@
-![Screenshot](assets/screenshot.png)
+![Screenshot](logos/logo.png)
 
 # Domain Sale Landing Pages
 
