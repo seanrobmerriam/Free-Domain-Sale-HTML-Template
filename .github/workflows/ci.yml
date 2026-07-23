@@ -21,6 +21,9 @@ jobs:
 
       - run: npm ci
 
+      - name: Smoke test (verifies theme switcher is wired up)
+        run: npm run smoke-test
+
       - run: npm run lint
 
       - run: npm run build
